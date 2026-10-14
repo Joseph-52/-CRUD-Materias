@@ -12,7 +12,11 @@ class DatosMateriaController extends Controller
      */
     public function index()
     {
-        //
+        $datosMateria = DatosMateria::all();
+
+        return view('index_materias')->with([
+            'DatosMaterias' => $datosMateria,
+        ]);
     }
 
     /**
@@ -20,7 +24,7 @@ class DatosMateriaController extends Controller
      */
     public function create()
     {
-        //
+        return view('New-Materia');
     }
 
     /**
@@ -28,7 +32,13 @@ class DatosMateriaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $DatMat = new DatosMateria();
+        $DatMat->nombre = $request->nombre;
+        $DatMat->profesor = $request->profesor;
+        $DatMat->creditos = $request->creditos;
+        $DatMat->save();
+
+        return redirect()->route('Datos-Materia.index');
     }
 
     /**
@@ -36,7 +46,7 @@ class DatosMateriaController extends Controller
      */
     public function show(DatosMateria $datosMateria)
     {
-        //
+        return view('detalles', compact('datosMateria'));
     }
 
     /**
@@ -44,7 +54,7 @@ class DatosMateriaController extends Controller
      */
     public function edit(DatosMateria $datosMateria)
     {
-        //
+        return view('editar', compact('datosMateria'));
     }
 
     /**
@@ -52,7 +62,12 @@ class DatosMateriaController extends Controller
      */
     public function update(Request $request, DatosMateria $datosMateria)
     {
-        //
+        $datosMateria->nombre = $request->nombre;
+        $datosMateria->profesor = $request->profesor;
+        $datosMateria->creditos = $request->creditos;
+        $datosMateria->save();
+
+        return redirect()->route('Datos-Materia.show', $datosMateria);
     }
 
     /**
@@ -60,6 +75,8 @@ class DatosMateriaController extends Controller
      */
     public function destroy(DatosMateria $datosMateria)
     {
-        //
+        $datosMateria->delete();
+
+        return redirect()->route('Datos-Materia.index', $datosMateria);
     }
 }
