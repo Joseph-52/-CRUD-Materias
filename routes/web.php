@@ -8,4 +8,6 @@ use App\Http\Controllers\DatosMateriaController;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::resource('Datos-Materia', DatosMateriaController::class);
+Route::resource('Datos-Materia', DatosMateriaController::class)->parameters([
+    'Datos-Materia' => 'datosMateria'
+]);
