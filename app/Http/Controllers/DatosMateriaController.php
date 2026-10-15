@@ -15,7 +15,7 @@ class DatosMateriaController extends Controller
         $datosMateria = DatosMateria::all();
 
         return view('index_materias')->with([
-            'DatosMaterias' => $datosMateria,
+            'DatosMateria' => $datosMateria,
         ]);
     }
 
